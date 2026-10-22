@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Professional residential and commercial property management for Nigerian landlords.">
+    <title>Property Management | Haybee Consults</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { brand: { primary: '#201611', dark: '#212121', light: '#FFEAD5', bg: '#FFFFFF' } } } } }</script>
+    <link rel="stylesheet" href="assets/css/site.css">
+    <script defer src="assets/js/site.js"></script>
+</head>
+
+<body>
+    <div data-site-header></div>
+    <main>
+        <section class="hero page-hero hero-landlords">
+            <div class="wrap hero-inner">
+                <p class="eyebrow light">FOR LANDLORDS & ASSET OWNERS</p>
+                <h1>Your property,<br>in <em>good hands.</em></h1>
+                <p class="hero-copy">Protect your investment and give tenants a better experience with thoughtful,
+                    accountable property management.</p>
+            </div>
+        </section>
+        <section class="page-content wrap">
+            <div class="page-lead">
+                <h2>Make ownership<br><em>feel effortless.</em></h2>
+                <p>Our management team looks after the details that protect long-term value: tenant selection, rent
+                    administration and responsive building care. You receive clear updates and a single accountable
+                    partner.</p>
+            </div>
+            <div class="pillars">
+                <article class="pillar"><b>01 · Five point tenant screening</b>
+                    <p>Identity and reference checks, income verification, affordability review and a documented tenancy
+                        profile before move-in.</p>
+                </article>
+                <article class="pillar"><b>02 · Rent administration</b>
+                    <p>Scheduled billing, clear arrears follow-up and regular owner statements that make cash flow
+                        easier to understand.</p>
+                </article>
+                <article class="pillar"><b>03 · Responsive facilities</b>
+                    <p>Preventive maintenance and a trusted vendor network to resolve issues quickly and reduce
+                        avoidable downtime.</p>
+                </article>
+            </div>
+        </section>
+        <section class="form-section">
+            <div class="form-shell">
+                <p class="eyebrow">OWNER SERVICES</p>
+                <h2>Onboard your property</h2>
+                <p>Give us a few details and we’ll arrange a conversation about the right scope for your asset.</p>
+                <form class="form-grid" data-feedback-form><input type="hidden" name="form-name"
+                        value="Property management onboarding"><label class="field full">Property address<input
+                            name="address" required></label><label class="field">Number of units<input type="number"
+                            name="units" min="1" required></label><label class="field">Current occupancy rate<select
+                            name="occupancy" required>
+                            <option value="">Select occupancy</option>
+                            <option>Fully occupied</option>
+                            <option>75–99%</option>
+                            <option>50–74%</option>
+                            <option>Below 50%</option>
+                            <option>Vacant</option>
+                        </select></label><label class="field">Preferred management scope<select name="scope" required>
+                            <option value="">Select scope</option>
+                            <option>Full management</option>
+                            <option>Facilities only</option>
+                        </select></label><label class="field">Your name<input name="name" required></label><label
+                        class="field full">Email address<input type="email" name="email" required></label>
+                    <div class="field full"><button class="button button-dark" type="submit">Request an onboarding call
+                            <i class="fa-solid fa-arrow-right"></i></button>
+                        <p class="form-status" aria-live="polite"></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <div data-site-footer></div>
+</body>
+
+</html>

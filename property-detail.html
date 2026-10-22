@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore verified property details and arrange a viewing with Haybee Consults.">
+  <title>Property details | Haybee Consults</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script><script>tailwind.config={theme:{extend:{colors:{brand:{primary:'#201611',dark:'#212121',light:'#FFEAD5',bg:'#FFFFFF'}}}}}</script>
+  <link rel="stylesheet" href="assets/css/site.css"><script defer src="assets/js/site.js"></script>
+</head>
+<body>
+  <div data-site-header></div>
+  <main>
+    <div class="detail-back wrap"><a class="text-link" href="catalog.html"><i class="fa-solid fa-arrow-left"></i> Back to properties</a></div>
+    <section data-property-detail-view></section>
+  </main>
+  <div data-site-footer></div>
+  <div class="modal-backdrop" id="inspection-modal" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="inspection-title"><button class="modal-close" type="button" aria-label="Close">×</button><h2 id="inspection-title">Schedule an inspection</h2><p class="form-copy" data-modal-property></p><form data-feedback-form><input type="hidden" name="form-name" value="Inspection request"><label class="field">Your name<input name="name" required autocomplete="name"></label><label class="field">Email address<input type="email" name="email" required autocomplete="email"></label><label class="field">Preferred date<input type="date" name="date" required></label><button class="button button-dark" type="submit">Request inspection <i class="fa-solid fa-arrow-right"></i></button><p class="form-status" aria-live="polite"></p></form></div></div>
+</body>
+</html>
