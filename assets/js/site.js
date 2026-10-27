@@ -4,8 +4,6 @@
     ["Home", "index.html", "index"],
     ["Properties", "catalog.html", "catalog"],
     ["Commercial Desk", "commercial.html", "commercial"],
-    ["Joint Ventures", "joint-ventures.html", "joint-ventures"],
-    ["Property Management", "property-management.html", "property-management"],
     ["About Us", "about.html", "about"],
     ["Contact", "contact.html", "contact"],
   ];
@@ -17,7 +15,7 @@
     header.innerHTML = `<header class="site-header"><div class="wrap nav-row">
       <a class="brand" href="index.html" aria-label="Haybee Consults home"><span class="brand-mark">H</span><span class="brand-name">Haybee<small>Consults</small></span></a>
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-      <nav class="main-nav" aria-label="Main navigation">${routes.map(([label, href, key]) => `<a href="${href}"${(currentPage === key || (key === "index" && currentPage === "index")) ? ' class="current" aria-current="page"' : ""}>${label}</a>`).join("")}<a class="button button-dark nav-cta" href="catalog.html#listings">Book Inspection <i class="fa-solid fa-arrow-right"></i></a></nav>
+      <nav class="main-nav" aria-label="Main navigation">${routes.slice(0, 3).map(([label, href, key]) => `<a href="${href}"${currentPage === key ? ' class="current" aria-current="page"' : ""}>${label}</a>`).join("")}<div class="nav-dropdown${["joint-ventures", "property-management"].includes(currentPage) ? " current" : ""}"><button type="button" class="nav-dropdown-toggle" aria-expanded="false">Ventures <i class="fa-solid fa-chevron-down"></i></button><div class="nav-dropdown-menu"><a href="joint-ventures.html"${currentPage === "joint-ventures" ? ' class="current" aria-current="page"' : ""}>Joint Ventures</a><a href="property-management.html"${currentPage === "property-management" ? ' class="current" aria-current="page"' : ""}>Property Management</a></div></div>${routes.slice(3).map(([label, href, key]) => `<a href="${href}"${currentPage === key ? ' class="current" aria-current="page"' : ""}>${label}</a>`).join("")}<a class="button button-dark nav-cta" href="catalog.html#listings">Book Inspection <i class="fa-solid fa-arrow-right"></i></a></nav>
     </div></header><div class="menu-backdrop"></div>`;
   }
 
@@ -188,6 +186,20 @@
   const menuButton = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".main-nav");
   const backdrop = document.querySelector(".menu-backdrop");
+  const ventures = document.querySelector(".nav-dropdown");
+  const venturesToggle = document.querySelector(".nav-dropdown-toggle");
+  const closeVentures = () => {
+    ventures?.classList.remove("open");
+    venturesToggle?.setAttribute("aria-expanded", "false");
+  };
+  venturesToggle?.addEventListener("click", () => {
+    const open = !ventures.classList.contains("open");
+    ventures.classList.toggle("open", open);
+    venturesToggle.setAttribute("aria-expanded", String(open));
+  });
+  document.addEventListener("click", (event) => {
+    if (ventures && !ventures.contains(event.target)) closeVentures();
+  });
   const closeMenu = () => {
     nav?.classList.remove("open");
     backdrop?.classList.remove("open");
@@ -211,6 +223,7 @@
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       closeMenu();
+      closeVentures();
       closeInspection();
     }
   });
@@ -393,10 +406,18 @@
     }, { threshold: 0.12 });
     revealItems.forEach((item) => revealObserver.observe(item));
 
-    const countObserver = new IntersectionObserver((entries, observer) => {
+    const countFrames = new WeakMap();
+    const countObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
         const counter = entry.target;
+        if (!entry.isIntersecting) {
+          cancelAnimationFrame(countFrames.get(counter));
+          counter.dataset.counting = "false";
+          counter.textContent = "0+";
+          return;
+        }
+        if (counter.dataset.counting === "true") return;
+        counter.dataset.counting = "true";
         const target = Number(counter.dataset.count);
         const duration = 1500;
         const start = performance.now();
@@ -404,10 +425,10 @@
           const progress = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           counter.textContent = `${Math.round(target * eased).toLocaleString()}+`;
-          if (progress < 1) requestAnimationFrame(tick);
+          if (progress < 1) countFrames.set(counter, requestAnimationFrame(tick));
+          else countFrames.delete(counter);
         };
-        requestAnimationFrame(tick);
-        observer.unobserve(counter);
+        countFrames.set(counter, requestAnimationFrame(tick));
       });
     }, { threshold: 0.5 });
     document.querySelectorAll("[data-count]").forEach((counter) => countObserver.observe(counter));
